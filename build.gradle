@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.0.0-beta6'
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+    id("xyz.jpenilla.run-paper") version "2.3.1" // Adds runServer and runMojangMappedServer tasks for testing
+    id("xyz.jpenilla.resource-factory-paper-convention") version "1.2.0"
+}
+
+group = 'org.minelore.plugin'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url ("https://repo.dmulloy2.net/repository/public/") }
+    maven { url ("https://mymavenrepo.com/repo/AzWPavD3lYKKBaGswiVO/") }
+}
+
+dependencies {
+    paperweight.paperDevBundle('1.21.1-R0.1-SNAPSHOT')
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    implementation 'org.incendo:cloud-paper:2.0.0-beta.10'
+    implementation 'me.thedivazo.libs.DVZConfig:core:1.0.0'
+    implementation 'me.thedivazo.libs.DVZConfig:lang-yml:1.0.0'
+    implementation 'me.thedivazo.libs.DVZConfig:platform-paper:1.0.0'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+tasks {
+    runServer {
+        downloadPlugins {
+            github("dmulloy2", "ProtocolLib", "5.3.0", "ProtocolLib.jar")
+        }
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.21.1")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveClassifier.set('')
+}
+
+java {
+    withSourcesJar()
+}
+
+sourcesJar {
+
+}
+
+shadowJar.dependsOn(sourcesJar)
+
+jar.dependsOn(shadowJar)
+
+paperPluginYaml {
+    main.set("org.minelore.plugin.anomalyevent.AnomalyEvent")
+    authors.add("MineLoreSMP")
+    authors.add("TheDiVaZo")
+    authors.add("CaHeK2009")
+    apiVersion.set("1.21")
+    dependencies.server.register("ProtocolLib")
+}
