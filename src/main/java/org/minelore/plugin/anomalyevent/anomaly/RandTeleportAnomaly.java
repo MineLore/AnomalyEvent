@@ -1,14 +1,8 @@
-package org.minelore.plugin.anomalyevent.activator;
+package org.minelore.plugin.anomalyevent.anomaly;
 
-import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Pose;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.minelore.plugin.anomalyevent.data.RandTeleportData;
 import org.minelore.plugin.anomalyevent.util.RandomUtil;

@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.activator;
+package org.minelore.plugin.anomalyevent.anomaly;
 
 import org.bukkit.entity.LivingEntity;
 import org.minelore.plugin.anomalyevent.data.PotionData;

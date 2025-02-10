@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.activator;
+package org.minelore.plugin.anomalyevent.anomaly;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;

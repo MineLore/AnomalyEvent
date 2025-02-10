@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.activator;
+package org.minelore.plugin.anomalyevent.anomaly;
 
 public interface Anomaly<T> {
     String getName();

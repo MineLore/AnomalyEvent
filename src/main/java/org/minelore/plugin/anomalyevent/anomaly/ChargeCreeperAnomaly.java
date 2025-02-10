@@ -1,8 +1,6 @@
-package org.minelore.plugin.anomalyevent.activator;
+package org.minelore.plugin.anomalyevent.anomaly;
 
-import org.bukkit.craftbukkit.entity.CraftCreeper;
 import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.minelore.plugin.anomalyevent.data.ChargeCreeperData;
