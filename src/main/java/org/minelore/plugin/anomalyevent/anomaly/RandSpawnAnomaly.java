@@ -11,6 +11,10 @@ import org.minelore.plugin.anomalyevent.util.RayTraceUtil;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Аномалия на рандомное появление мобов в радиусе
+ * @param <T> класс цели, во круг которой будут появляться мобы. Например, {@link org.bukkit.entity.Player}
+ */
 public class RandSpawnAnomaly<T extends LivingEntity> extends FromDataAnomaly<RandSpawnData, T> {
     public RandSpawnAnomaly(String name, RandSpawnData data) {
         super(name, data);

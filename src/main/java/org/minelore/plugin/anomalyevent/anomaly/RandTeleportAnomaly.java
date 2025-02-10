@@ -10,6 +10,10 @@ import org.minelore.plugin.anomalyevent.util.RayTraceUtil;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Аномалия на случайное перемещение
+ * @param <T> класс цели, которую будут перемещать. Например, {@link org.bukkit.entity.Player}
+ */
 public class RandTeleportAnomaly<T extends LivingEntity> extends FromDataAnomaly<RandTeleportData, T> {
     public RandTeleportAnomaly(String name, RandTeleportData data) {
         super(name, data);

@@ -15,6 +15,7 @@ public final class RayTraceUtil {
         Location resultLocation = start.toLocation(world);
         if (rayTraceResult != null && rayTraceResult.getHitBlock() != null && rayTraceResult.getHitBlockFace() != null) {
             Vector hitPosition = rayTraceResult.getHitPosition();
+            //т.к. векторы коллинеарны, для выяснения того, чья длинна больше, можно сравнить их по любой координате
             if (direction.getX() - hitPosition.getX() >= 0) {
                 Location hitBlock = rayTraceResult.getHitBlock().getLocation();
                 resultLocation = hitBlock.add(rayTraceResult.getHitBlockFace().getDirection());

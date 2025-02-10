@@ -13,6 +13,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Аномалия на удар молнией по цели
+ * @param <T> класс цели, в которую будет ударять молния. Например, {@link org.bukkit.entity.Player}
+ */
 public class ThunderStrikeAnomaly<T extends LivingEntity> extends FromDataAnomaly<ThunderStrikeData, T> implements Anomaly.Deactivable<T> {
     protected final Map<UUID, BukkitTask> tasks = new ConcurrentHashMap<>();
     protected final AnomalyEvent plugin;
@@ -25,6 +29,7 @@ public class ThunderStrikeAnomaly<T extends LivingEntity> extends FromDataAnomal
     @Override
     public void activate(LivingEntity target) {
         deactivate(target);
+        //т.к. интервала между ударами не будет, можно сразу одновременно ударить всеми молниями
         if (data.interval.isZero()) {
             for (int i = 0; i < data.countLighting; i++) {
                 target.getWorld().strikeLightning(target.getLocation());
