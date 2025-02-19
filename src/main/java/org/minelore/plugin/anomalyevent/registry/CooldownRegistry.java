@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.util;
+package org.minelore.plugin.anomalyevent.registry;
 
 import java.time.Duration;
 import java.util.Optional;
