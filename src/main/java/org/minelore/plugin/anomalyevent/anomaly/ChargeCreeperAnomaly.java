@@ -1,9 +1,9 @@
 package org.minelore.plugin.anomalyevent.anomaly;
 
+import com.google.common.base.Objects;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.minelore.plugin.anomalyevent.data.ChargeCreeperData;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,20 +12,39 @@ import java.util.concurrent.ThreadLocalRandom;
  * Аномалия на превращение обычного крипера в зараженного
  * @param <T> класс цели, во круг которой криперы будут превращаться. Например, {@link org.bukkit.entity.Player}
  */
-public class ChargeCreeperAnomaly<T extends LivingEntity> extends FromDataAnomaly<ChargeCreeperData, T> {
-    public ChargeCreeperAnomaly(String name, ChargeCreeperData data) {
-        super(name, data);
+public class ChargeCreeperAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
+    public final double distance;
+    public final int creeperCount;
+    public final double probability;
+
+    public ChargeCreeperAnomaly(String name, double distance, int creeperCount, double probability) {
+        super(name);
+        this.distance = distance;
+        this.creeperCount = creeperCount;
+        this.probability = probability;
     }
 
     @Override
     public void activate(T target) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         Arrays.stream(target.getChunk().getEntities())
-                .filter(entity -> entity.getLocation().distance(target.getLocation()) <= data.distance
+                .filter(entity -> entity.getLocation().distance(target.getLocation()) <= distance
                         && entity.getType().equals(EntityType.CREEPER))
-                .limit(data.creeperCount)
-                .filter(entity -> random.nextDouble() <= data.probability)
+                .limit(creeperCount)
+                .filter(entity -> random.nextDouble() <= probability)
                 .map(Creeper.class::cast)
                 .forEach(creeper -> creeper.setPowered(true));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ChargeCreeperAnomaly<?> that)) return false;
+        if (!super.equals(o)) return false;
+        return Double.compare(distance, that.distance) == 0 && creeperCount == that.creeperCount && Double.compare(probability, that.probability) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(super.hashCode(), distance, creeperCount, probability);
     }
 }
