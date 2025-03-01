@@ -1,6 +1,6 @@
 package org.minelore.plugin.anomalyevent.launcher;
 
-import org.minelore.plugin.anomalyevent.anomaly.Anomaly;
+import org.minelore.plugin.anomalyevent.anomaly.local.LocalAnomaly;
 import org.minelore.plugin.anomalyevent.util.CooldownRegistry;
 
 import java.time.Duration;
@@ -9,7 +9,7 @@ import java.time.Duration;
 * @author TheDiVaZo
 * created on 20.02.2025
 */
-public class CooldownAnomalyLauncher<A extends Anomaly<?>> implements Launcher<A>
+public class CooldownAnomalyLauncher<A extends LocalAnomaly<?>> implements Launcher<A>
 {
     private final Launcher<A> launcher;
     private final CooldownRegistry<A> cooldownRegistry;

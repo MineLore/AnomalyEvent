@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import com.google.common.base.Objects;
 import org.bukkit.Location;
@@ -16,12 +16,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * Аномалия на рандомное появление мобов в радиусе
  * @param <T> класс цели, во круг которой будут появляться мобы. Например, {@link org.bukkit.entity.Player}
  */
-public class RandSpawnAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
+public class RandSpawnLocalAnomaly<T extends LivingEntity> extends AbstractLocalAnomaly<T> {
     private final EntityType entityType;
     private final int count;
     private final double maxDistance;
 
-    public RandSpawnAnomaly(String name, EntityType entityType, int count, double maxDistance) {
+    public RandSpawnLocalAnomaly(String name, EntityType entityType, int count, double maxDistance) {
         super(name);
         this.entityType = entityType;
         this.count = count;
@@ -45,7 +45,7 @@ public class RandSpawnAnomaly<T extends LivingEntity> extends AbstractAnomaly<T>
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof RandSpawnAnomaly<?> that)) return false;
+        if (!(o instanceof RandSpawnLocalAnomaly<?> that)) return false;
         if (!super.equals(o)) return false;
         return count == that.count && Double.compare(maxDistance, that.maxDistance) == 0 && entityType == that.entityType;
     }

@@ -1,12 +1,12 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import com.google.common.base.Objects;
 
-public abstract class AbstractAnomaly<T> implements Anomaly<T> {
+public abstract class AbstractLocalAnomaly<T> implements LocalAnomaly<T> {
 
     protected final String name;
 
-    protected AbstractAnomaly(String name) {
+    protected AbstractLocalAnomaly(String name) {
         this.name = name;
     }
 
@@ -17,7 +17,7 @@ public abstract class AbstractAnomaly<T> implements Anomaly<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof AbstractAnomaly<?> that)) return false;
+        if (!(o instanceof AbstractLocalAnomaly<?> that)) return false;
         return Objects.equal(name, that.name);
     }
 

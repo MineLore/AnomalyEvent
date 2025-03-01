@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import com.google.common.base.Objects;
 import org.bukkit.entity.LivingEntity;
@@ -8,10 +8,10 @@ import org.bukkit.potion.PotionEffect;
  * Аномалия на наложение зелий
  * @param <T> класс цели, на которую накладывают зелья. Например, {@link org.bukkit.entity.Player}
  */
-public class PotionAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
+public class PotionLocalAnomaly<T extends LivingEntity> extends AbstractLocalAnomaly<T> {
     private final PotionEffect potionEffect;
 
-    public PotionAnomaly(String name, PotionEffect potionEffect) {
+    public PotionLocalAnomaly(String name, PotionEffect potionEffect) {
         super(name);
         this.potionEffect = potionEffect;
     }
@@ -23,7 +23,7 @@ public class PotionAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof PotionAnomaly<?> that)) return false;
+        if (!(o instanceof PotionLocalAnomaly<?> that)) return false;
         if (!super.equals(o)) return false;
         return Objects.equal(potionEffect, that.potionEffect);
     }

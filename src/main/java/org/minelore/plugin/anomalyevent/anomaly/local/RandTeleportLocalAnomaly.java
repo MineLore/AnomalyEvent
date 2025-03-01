@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import com.google.common.base.Objects;
 import org.bukkit.Location;
@@ -14,10 +14,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * Аномалия на случайное перемещение
  * @param <T> класс цели, которую будут перемещать. Например, {@link org.bukkit.entity.Player}
  */
-public class RandTeleportAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
+public class RandTeleportLocalAnomaly<T extends LivingEntity> extends AbstractLocalAnomaly<T> {
     private final double maxDistance;
 
-    public RandTeleportAnomaly(String name, double maxDistance) {
+    public RandTeleportLocalAnomaly(String name, double maxDistance) {
         super(name);
         this.maxDistance = maxDistance;
     }
@@ -36,7 +36,7 @@ public class RandTeleportAnomaly<T extends LivingEntity> extends AbstractAnomaly
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof RandTeleportAnomaly<?> that)) return false;
+        if (!(o instanceof RandTeleportLocalAnomaly<?> that)) return false;
         if (!super.equals(o)) return false;
         return Double.compare(maxDistance, that.maxDistance) == 0;
     }

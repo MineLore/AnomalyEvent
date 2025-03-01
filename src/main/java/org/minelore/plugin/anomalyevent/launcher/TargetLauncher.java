@@ -1,6 +1,6 @@
 package org.minelore.plugin.anomalyevent.launcher;
 
-import org.minelore.plugin.anomalyevent.anomaly.Anomaly;
+import org.minelore.plugin.anomalyevent.anomaly.local.LocalAnomaly;
 
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * @author TheDiVaZo
  * created on 20.02.2025
  */
-public class TargetLauncher<T, A extends Anomaly<T>> implements Launcher<A> {
+public class TargetLauncher<T, A extends LocalAnomaly<T>> implements Launcher<A> {
     protected final Supplier<Iterator<T>> iteratorSupplier;
 
     public TargetLauncher(Supplier<Iterator<T>> iteratorSupplier) {

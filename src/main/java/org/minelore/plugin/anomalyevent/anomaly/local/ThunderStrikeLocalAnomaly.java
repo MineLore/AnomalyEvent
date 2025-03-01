@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -16,15 +16,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Аномалия на удар молнией по цели
  * @param <T> класс цели, в которую будет ударять молния. Например, {@link org.bukkit.entity.Player}
  */
-public class ThunderStrikeAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> implements Anomaly.Deactivable<T> {
+public class ThunderStrikeLocalAnomaly<T extends LivingEntity> extends AbstractLocalAnomaly<T> implements LocalAnomaly.Deactivable<T> {
     private final AnomalyEvent plugin;
     private final int countLighting;
     private final Duration interval;
 
     private final Map<UUID, BukkitTask> tasks = new ConcurrentHashMap<>();
-    private final WeakHashMap<UUID, AnomalyActivatedBukkitTask> cache = new WeakHashMap<>();
+    private final WeakHashMap<UUID, ImpactAnomalyBukkitTask> cache = new WeakHashMap<>();
 
-    public ThunderStrikeAnomaly(AnomalyEvent plugin, String name, int countLighting, Duration interval) {
+    public ThunderStrikeLocalAnomaly(AnomalyEvent plugin, String name, int countLighting, Duration interval) {
         super(name);
         this.plugin = plugin;
         this.countLighting = countLighting;
@@ -78,19 +78,18 @@ public class ThunderStrikeAnomaly<T extends LivingEntity> extends AbstractAnomal
 
     @Override
     @Nullable
-    public AnomalyActivated<T> getActivate(T target) {
+    public ImpactAnomaly<T> getActivated(T target) {
         BukkitTask bukkitTask = tasks.get(target.getUniqueId());
         if (bukkitTask != null) {
-            AnomalyActivatedBukkitTask anomalyBukkitTask = cache.computeIfAbsent(target.getUniqueId(), (uuid) -> new AnomalyActivatedBukkitTask(target, bukkitTask));
-            return anomalyBukkitTask;
+            return cache.computeIfAbsent(target.getUniqueId(), (uuid) -> new ImpactAnomalyBukkitTask(target, bukkitTask));
         }
         else return null;
     }
 
-    class AnomalyActivatedBukkitTask implements AnomalyActivated<T> {
+    class ImpactAnomalyBukkitTask implements ImpactAnomaly<T> {
         private final T target;
         private final BukkitTask bukkitTask;
-        protected AnomalyActivatedBukkitTask(T target, BukkitTask bukkitTask) {
+        protected ImpactAnomalyBukkitTask(T target, BukkitTask bukkitTask) {
             this.target = target;
             this.bukkitTask = bukkitTask;
         }
@@ -117,7 +116,7 @@ public class ThunderStrikeAnomaly<T extends LivingEntity> extends AbstractAnomal
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof ThunderStrikeAnomaly<?> that)) return false;
+        if (!(o instanceof ThunderStrikeLocalAnomaly<?> that)) return false;
         if (!super.equals(o)) return false;
         return countLighting == that.countLighting && com.google.common.base.Objects.equal(plugin, that.plugin) && com.google.common.base.Objects.equal(interval, that.interval) && com.google.common.base.Objects.equal(tasks, that.tasks) && com.google.common.base.Objects.equal(cache, that.cache);
     }

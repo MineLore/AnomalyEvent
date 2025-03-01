@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.anomaly;
+package org.minelore.plugin.anomalyevent.anomaly.local;
 
 import com.google.common.base.Objects;
 import org.bukkit.entity.Creeper;
@@ -12,12 +12,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * Аномалия на превращение обычного крипера в зараженного
  * @param <T> класс цели, во круг которой криперы будут превращаться. Например, {@link org.bukkit.entity.Player}
  */
-public class ChargeCreeperAnomaly<T extends LivingEntity> extends AbstractAnomaly<T> {
+public class ChargeCreeperLocalAnomaly<T extends LivingEntity> extends AbstractLocalAnomaly<T> {
     public final double distance;
     public final int creeperCount;
     public final double probability;
 
-    public ChargeCreeperAnomaly(String name, double distance, int creeperCount, double probability) {
+    public ChargeCreeperLocalAnomaly(String name, double distance, int creeperCount, double probability) {
         super(name);
         this.distance = distance;
         this.creeperCount = creeperCount;
@@ -38,7 +38,7 @@ public class ChargeCreeperAnomaly<T extends LivingEntity> extends AbstractAnomal
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof ChargeCreeperAnomaly<?> that)) return false;
+        if (!(o instanceof ChargeCreeperLocalAnomaly<?> that)) return false;
         if (!super.equals(o)) return false;
         return Double.compare(distance, that.distance) == 0 && creeperCount == that.creeperCount && Double.compare(probability, that.probability) == 0;
     }
