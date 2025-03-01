@@ -24,12 +24,17 @@ public class LocalAnomalyLauncherImpl<T, A extends LocalAnomaly<T>> implements L
 
     @Override
     public boolean launch(T target) {
-        if (localDateTime.isBefore(LocalDateTime.now())) {
+        if (hasLaunchReady()) {
             anomaly.activate(target);
             localDateTime = LocalDateTime.now().plus(duration);
             return true;
         }
         else return false;
+    }
+
+    @Override
+    public boolean hasLaunchReady() {
+        return localDateTime.isBefore(LocalDateTime.now());
     }
 
     @Override

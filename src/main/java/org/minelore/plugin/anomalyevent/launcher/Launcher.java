@@ -8,5 +8,6 @@ import org.minelore.plugin.anomalyevent.anomaly.local.LocalAnomaly;
 */
 public interface Launcher<T, A extends LocalAnomaly<T>> {
     boolean launch(T target);
+    boolean hasLaunchReady();
     A getAnomaly();
 }
