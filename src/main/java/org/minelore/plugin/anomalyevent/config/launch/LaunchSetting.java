@@ -6,5 +6,4 @@ public class LaunchSetting {
     private String anomalyName;
     private boolean hasActive;
     private Duration cooldown;
-    private Double probabilityActivate;
 }
