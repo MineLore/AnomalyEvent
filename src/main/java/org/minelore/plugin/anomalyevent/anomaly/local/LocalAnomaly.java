@@ -13,6 +13,7 @@ public interface LocalAnomaly<T> extends Anomaly {
         void deactivate(T target);
         void deactivateAll();
         boolean hasActivate(T target);
+        boolean hasActive();
         ImpactAnomaly<T> getActivated(T target);
     }
 }

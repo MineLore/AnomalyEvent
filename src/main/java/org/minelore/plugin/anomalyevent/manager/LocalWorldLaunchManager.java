@@ -3,23 +3,23 @@ package org.minelore.plugin.anomalyevent.manager;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.minelore.plugin.anomalyevent.anomaly.depend.Scheduler;
-import org.minelore.plugin.anomalyevent.launcher.Launcher;
+import org.minelore.plugin.anomalyevent.launcher.LocalLauncher;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-public class LocalAnomalyManager {
+public class LocalWorldLaunchManager implements WorldLaunchManager {
     private final Supplier<Player> playerSupplier;
-    private final List<Launcher<Player, ?>> launchers;
+    private final List<LocalLauncher<Player, ?>> localLaunchers;
     private final int periodInTick;
     private final Scheduler scheduler;
 
 
     private BukkitTask anomalyTask;
 
-    public LocalAnomalyManager(Supplier<Player> playerSupplier, List<Launcher<Player, ?>> launchers, int periodInTick, Scheduler scheduler) {
+    public LocalWorldLaunchManager(Supplier<Player> playerSupplier, List<LocalLauncher<Player, ?>> localLaunchers, int periodInTick, Scheduler scheduler) {
         this.playerSupplier = playerSupplier;
-        this.launchers = launchers;
+        this.localLaunchers = localLaunchers;
         this.periodInTick = periodInTick;
         this.scheduler = scheduler;
     }
@@ -27,11 +27,11 @@ public class LocalAnomalyManager {
     public void startTask() {
         if (anomalyTask != null) anomalyTask.cancel();
         anomalyTask = scheduler.runTaskTimer(() -> {
-            for (Launcher<Player, ?> launcher : launchers) {
-                if (launcher.hasLaunchReady()) {
+            for (LocalLauncher<Player, ?> localLauncher : localLaunchers) {
+                if (localLauncher.hasLaunchReady()) {
                     Player player = playerSupplier.get();
                     if (player != null) {
-                        launcher.launch(player);
+                        localLauncher.launch(player);
                     }
                 }
             }
