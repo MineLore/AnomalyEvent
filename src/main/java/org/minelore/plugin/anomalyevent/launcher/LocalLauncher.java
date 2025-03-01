@@ -3,7 +3,6 @@ package org.minelore.plugin.anomalyevent.launcher;
 import org.minelore.plugin.anomalyevent.anomaly.local.LocalAnomaly;
 import org.minelore.plugin.anomalyevent.launcher.condition.ConditionLaunch;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
@@ -15,7 +14,7 @@ import java.util.function.Function;
 public interface LocalLauncher<T, A extends LocalAnomaly<T>> extends Launcher<A> {
     boolean launch(T target);
 
-    static <T, A extends LocalAnomaly<T>> Builder<T, A> builder() {
+    static <T, A extends LocalAnomaly<T>> AnomalyBuilder<T, A> builder() {
         return new Builder<>();
     }
 
