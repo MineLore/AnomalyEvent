@@ -1,4 +1,4 @@
-package org.minelore.plugin.anomalyevent.config.launch;
+package org.minelore.plugin.anomalyevent.config.anomalies;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
@@ -6,7 +6,6 @@ import java.time.Duration;
 
 @ConfigSerializable
 public class LaunchSetting {
-    private String anomalyName;
     private boolean hasActive;
     private Duration cooldown;
 }
